@@ -1,3 +1,10 @@
+## Moved functionality
+Please note that a lot of the functionality which has been in this library is moving to **[CSF.ORM](https://github.com/csf-dev/CSF.ORM)**.  Further development will be found there.
+
+*It was found that a number of repositories were so closely linked that they should be converted to a single repository, even though they are multiple separate NuGet packages.*
+
+---
+
 # CSF.Data.NHibernate
 This library contains types which are useful for interacting with [the NHibernate ORM].
 
