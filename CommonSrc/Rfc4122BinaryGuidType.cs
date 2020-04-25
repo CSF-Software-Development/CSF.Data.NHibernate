@@ -8,7 +8,7 @@ using System.Data.Common;
 using NHibernate.Engine;
 #endif
 
-namespace CSF.Data.NHibernate
+namespace CSF.NHibernate
 {
     /// <summary>
     /// An NHibernate <see cref="IUserType"/> which stores a <see cref="Guid"/> as binary

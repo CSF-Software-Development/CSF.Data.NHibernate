@@ -15,10 +15,11 @@
     <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
+    <RootNamespace>CSF.NHibernate</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DefineConstants>TRACE;DEBUG;NHIBERNATE4</DefineConstants>
+    <DefineConstants>TRACE;NHIBERNATE4;DEBUG;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.Guids.NHibernate4.xml</DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
