@@ -20,6 +20,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate.Unproxy", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate.MonoSafeSQLite20Driver", "CSF.NHibernate.MonoSafeSQLite20Driver\CSF.NHibernate.MonoSafeSQLite20Driver.csproj", "{C1CEDF6C-5455-493F-9E04-5FDCE0F12EDD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate.NHibernate4Tests", "CSF.NHibernate.NHibernate4Tests\CSF.NHibernate.NHibernate4Tests.csproj", "{41069006-1043-47E7-81B5-307130359103}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate.NHibernate5Tests", "CSF.NHibernate.NHibernate5Tests\CSF.NHibernate.NHibernate5Tests.csproj", "{2981E836-3B49-452A-A79D-DDDFF3C18A49}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A7461300-5AC1-44D1-8845-40847792EA7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate.CommonTestLogic", "CSF.NHibernate.CommonTestLogic\CSF.NHibernate.CommonTestLogic.csproj", "{1F3EBCE8-9046-4C70-A346-148AD551940C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +58,18 @@ Global
 		{C1CEDF6C-5455-493F-9E04-5FDCE0F12EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1CEDF6C-5455-493F-9E04-5FDCE0F12EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1CEDF6C-5455-493F-9E04-5FDCE0F12EDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41069006-1043-47E7-81B5-307130359103}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41069006-1043-47E7-81B5-307130359103}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41069006-1043-47E7-81B5-307130359103}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41069006-1043-47E7-81B5-307130359103}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2981E836-3B49-452A-A79D-DDDFF3C18A49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2981E836-3B49-452A-A79D-DDDFF3C18A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2981E836-3B49-452A-A79D-DDDFF3C18A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2981E836-3B49-452A-A79D-DDDFF3C18A49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F3EBCE8-9046-4C70-A346-148AD551940C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F3EBCE8-9046-4C70-A346-148AD551940C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F3EBCE8-9046-4C70-A346-148AD551940C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F3EBCE8-9046-4C70-A346-148AD551940C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
@@ -59,5 +79,10 @@ Global
 		$1.TabsToSpaces = True
 		version = 6.1.3
 		StartupItem = Test.CSF.Data.NHibernate\Test.CSF.Data.NHibernate.csproj
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{41069006-1043-47E7-81B5-307130359103} = {A7461300-5AC1-44D1-8845-40847792EA7C}
+		{2981E836-3B49-452A-A79D-DDDFF3C18A49} = {A7461300-5AC1-44D1-8845-40847792EA7C}
+		{1F3EBCE8-9046-4C70-A346-148AD551940C} = {A7461300-5AC1-44D1-8845-40847792EA7C}
 	EndGlobalSection
 EndGlobal
