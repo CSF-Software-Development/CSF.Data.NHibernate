@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45;net461;netcoreapp2.0</TargetFrameworks>
+    <ReleaseVersion>6.1.3</ReleaseVersion>
+    <PackageId>CSF.NHibernate.Unproxy</PackageId>
+    <Authors>craigfowler</Authors>
+    <Title>CSF.NHibernate.Unproxy</Title>
+    <Description>A very small convenience service to 'unproxy' NHibernate proxy objects.</Description>
+    <Version>$(ReleaseVersion)</Version>
+    <PackageVersion>$(ReleaseVersion)</PackageVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright 2020 - CSF Software Limited</Copyright>
+    <PackageProjectUrl>https://github.com/csf-dev/CSF.Data.NHibernate/</PackageProjectUrl>
+    <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
+    <RootNamespace>CSF.NHibernate</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.NHibernate.Unproxy.xml</DocumentationFile>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType></DebugType>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.NHibernate.Unproxy.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NHibernate" Version="[4.0.0.4000,6.0.0)">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+    <PackageReference Include="Iesi.Collections" Version="4.0.0.4000">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+  </ItemGroup>
+    
+  <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
+</Project>

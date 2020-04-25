@@ -71,12 +71,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\CSF.Data.NHibernate\CSF.Data.NHibernate.csproj">
-      <Project>{18466B45-F3E5-46D9-808D-EA2896CC7ACD}</Project>
-      <Name>CSF.Data.NHibernate</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
     <None Include="app.config" />
   </ItemGroup>
