@@ -32,103 +32,90 @@ namespace CSF.NHibernate
         public Type ReturnedType => typeof(Guid);
 
         /// <summary>
-        /// Determines whether two instances of this type are equal or not.
+        /// Determines whether two instances of this type are equal or not, for the purposes of persistence.
         /// </summary>
-        /// <param name="x">The x coordinate.</param>
-        /// <param name="y">The y coordinate.</param>
+        /// <param name="x">The first object.</param>
+        /// <param name="y">The second object.</param>
         public new bool Equals(object x, object y) => Equals(x, y);
 
         /// <summary>
         /// Get a hashcode for the instance, consistent with persistence "equality"
         /// </summary>
         /// <returns>The hash code.</returns>
-        /// <param name="x">The x coordinate.</param>
+        /// <param name="x">The object.</param>
         public int GetHashCode(object x) => x.GetHashCode();
 
-
 #if NHIBERNATE4
-
         /// <summary>
         /// Retrieve an instance of the mapped class from a ADO resultset.
-        /// Implementors should handle possibility of null values.
         /// </summary>
-        /// <param name="rs">a IDataReader</param>
-        /// <param name="names">column names</param>
-        /// <param name="owner">the containing entity</param>
-        /// <returns></returns>
-        /// <exception cref="T:NHibernate.HibernateException">HibernateException</exception>
+        /// <param name="rs">An ADO data-reader object</param>
+        /// <param name="names">An array of the column names from which to get data</param>
+        /// <param name="owner">The containing entity</param>
+        /// <returns>A <see cref="Guid"/>, or a null reference.</returns>
+        /// <exception cref="HibernateException"></exception>
         public object NullSafeGet(IDataReader rs, string[] names, object owner)
+#elif NHIBERNATE5
+        /// <summary>
+        /// Retrieve an instance of the mapped class from a ADO resultset.
+        /// </summary>
+        /// <param name="rs">An ADO data-reader object</param>
+        /// <param name="names">An array of the column names from which to get data</param>
+        /// <param name="owner">The containing entity</param>
+        /// <param name="session">A session implementor</param>
+        /// <returns>A <see cref="Guid"/>, or a null reference.</returns>
+        /// <exception cref="HibernateException"></exception>
+        public object NullSafeGet(DbDataReader rs, string[] names, ISessionImplementor session, object owner)
+#endif
         {
+#if NHIBERNATE4
             var bytes = (byte[])NHibernateUtil.Binary.NullSafeGet(rs, names[0]);
+#elif NHIBERNATE5
+            var bytes = (byte[]) NHibernateUtil.Binary.NullSafeGet(rs, names[0], session);
+#endif
 
             if (bytes?.Length != GuidByteCount) return null;
-
             return bytes.ToRFC4122Guid();
         }
 
+#if NHIBERNATE4
         /// <summary>
         /// Write an instance of the mapped class to a prepared statement.
-        ///  Implementors should handle possibility of null values.
-        ///  A multi-column type should be written to parameters starting from index.
         /// </summary>
-        /// <param name="cmd">a IDbCommand</param>
-        /// <param name="value">the object to write</param>
-        /// <param name="index">command parameter index</param>
-        /// <exception cref="T:NHibernate.HibernateException">HibernateException</exception>
+        /// <param name="cmd">An ADO database command object</param>
+        /// <param name="value">The object to write</param>
+        /// <param name="index">The zero-based index of the column (used for multi-column writes)</param>
+        /// <exception cref="HibernateException"></exception>
         public void NullSafeSet(IDbCommand cmd, object value, int index)
+#elif NHIBERNATE5
+        /// <summary>
+        /// Write an instance of the mapped class to a prepared statement.
+        /// </summary>
+        /// <param name="cmd">An ADO database command object</param>
+        /// <param name="value">The object to write</param>
+        /// <param name="index">The zero-based index of the column (used for multi-column writes)</param>
+        /// <param name="session">A session implementor</param>
+        /// <exception cref="HibernateException"></exception>
+        public void NullSafeSet(DbCommand cmd, object value, int index, ISessionImplementor session)
+#endif
         {
             if (!(value is Guid guid))
             {
+#if NHIBERNATE4
                 NHibernateUtil.Binary.NullSafeSet(cmd, null, index);
-                return;
-            }
-
-            var bytes = guid.ToRFC4122ByteArray();
-            NHibernateUtil.Binary.NullSafeSet(cmd, bytes, index);
-        }
-
 #elif NHIBERNATE5
-
-        /// <summary>
-        /// Retrieve an instance of the mapped class from a ADO resultset.
-        /// Implementors should handle possibility of null values.
-        /// </summary>
-        /// <param name="rs">a IDataReader</param>
-        /// <param name="names">column names</param>
-        /// <param name="owner">the containing entity</param>
-        /// <returns></returns>
-        /// <exception cref="T:NHibernate.HibernateException">HibernateException</exception>
-        public object NullSafeGet(DbDataReader rs, string[] names, ISessionImplementor session, object owner)
-        {
-            var bytes = (byte[]) NHibernateUtil.Binary.NullSafeGet(rs, names[0], session);
-
-            if (bytes?.Length != GuidByteCount) return null;
-
-            return bytes.ToRFC4122Guid();
-        }
-
-        /// <summary>
-        /// Write an instance of the mapped class to a prepared statement.
-        ///  Implementors should handle possibility of null values.
-        ///  A multi-column type should be written to parameters starting from index.
-        /// </summary>
-        /// <param name="cmd">a IDbCommand</param>
-        /// <param name="value">the object to write</param>
-        /// <param name="index">command parameter index</param>
-        /// <exception cref="T:NHibernate.HibernateException">HibernateException</exception>
-        public void NullSafeSet(DbCommand cmd, object value, int index, ISessionImplementor session)
-        {
-            if(!(value is Guid guid))
-            {
                 NHibernateUtil.Binary.NullSafeSet(cmd, null, index, session);
+#endif
                 return;
             }
 
             var bytes = guid.ToRFC4122ByteArray();
+#if NHIBERNATE4
+            NHibernateUtil.Binary.NullSafeSet(cmd, bytes, index);
+#elif NHIBERNATE5
             NHibernateUtil.Binary.NullSafeSet(cmd, bytes, index, session);
-        }
-
 #endif
+        }
 
         /// <summary>
         /// Return a deep copy of the persistent state, stopping at entities and at collections.

@@ -1,22 +1,28 @@
-using System;
 using NHibernate.Driver;
-using System.Reflection;
 
 namespace CSF.NHibernate
 {
     /// <summary>
-    /// A <see cref="ReflectionBasedDriver"/> for the SQLite database, which makes use of the
-    /// Mono-built-in SQLite driver (found in the <c>Mono.Data.Sqlite</c> namespace).  This works
-    /// around issues whereby <see cref="SQLite20Driver"/>, which ships with NHibernate does not work
-    /// on the Mono runtime.
+    /// <para>
+    /// A <see cref="ReflectionBasedDriver"/> for the SQLite database, which uses
+    /// Mono's built-in SQLite ADO driver.  This works around an issue whereby
+    /// NHibernate's stock <see cref="SQLite20Driver"/> crashes on Mono because it
+    /// uses a non-compatible ADO driver.
+    /// </para>
+    /// <para>
+    /// Ideally, do not use this driver directly.  Instead, use <seealso cref="MonoSafeSQLite20Driver"/>,
+    /// which will internally use this driver when executing on the Mono runtime.
+    /// If not using the Mono runtime, the Mono-safe SQLite driver will use the
+    /// NHibernate stock <see cref="SQLite20Driver"/>.  This means that the appropriate
+    /// driver will automatically be selected for the environment.
+    /// </para>
+    /// </summary>
     public class MonoSQLiteDriver : ReflectionBasedDriver
     {
-        static readonly IGetsMonoSQLiteAssembly AssemblyFinder = new MonoSQLiteAssemblyFinder();
-
         static readonly string
-          DriverNamespace = "Mono.Data.Sqlite",
-          ConnectionQualifiedTypeName = $"{DriverNamespace}.SqliteConnection",
-          CommandQualifiedTypeName = $"{DriverNamespace}.SqliteCommand";
+            DriverNamespace = "Mono.Data.Sqlite",
+            ConnectionQualifiedTypeName = $"{DriverNamespace}.SqliteConnection",
+            CommandQualifiedTypeName = $"{DriverNamespace}.SqliteCommand";
 
         /// <summary>
         /// Gets a value indicating whether this <see cref="MonoSQLiteDriver"/> uses named
@@ -56,10 +62,14 @@ namespace CSF.NHibernate
         /// <summary>
         /// Initializes a new instance of the <see cref="MonoSQLiteDriver"/> class.
         /// </summary>
-        public MonoSQLiteDriver() : this(AssemblyFinder.GetMonoSQLiteAssembly()) { }
+        /// <param name="assemblyFinder">A service which provides the assembly which contains the Mono SQLite ADO driver.</param>
+        public MonoSQLiteDriver(IGetsMonoSQLiteAssembly assemblyFinder)
+            : base(DriverNamespace, assemblyFinder.GetMonoSQLiteAssembly().FullName, ConnectionQualifiedTypeName, CommandQualifiedTypeName) { }
 
-        public MonoSQLiteDriver(Assembly assembly)
-            : base(DriverNamespace, assembly.FullName, ConnectionQualifiedTypeName, CommandQualifiedTypeName) { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MonoSQLiteDriver"/> class.
+        /// </summary>
+        public MonoSQLiteDriver() : this(new MonoSQLiteAssemblyFinder()) { }
     }
 }
 

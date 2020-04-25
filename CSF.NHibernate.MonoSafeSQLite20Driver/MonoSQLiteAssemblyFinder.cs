@@ -4,6 +4,10 @@ using CSF.Reflection;
 
 namespace CSF.NHibernate
 {
+    /// <summary>
+    /// An implementation of a service which gets a reference to the assembly containing
+    /// the Mono built-in SQLite ADO driver.
+    /// </summary>
     public class MonoSQLiteAssemblyFinder : IGetsMonoSQLiteAssembly
     {
         readonly IDetectsMono monoDetector;
@@ -13,6 +17,10 @@ namespace CSF.NHibernate
             "Mono.Data.Sqlite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756",
         };
 
+        /// <summary>
+        /// Gets the assembly containing the Mono SQLite ADO driver.
+        /// </summary>
+        /// <returns>The assembly which contains the Mono SQLite ADO driver.</returns>
         public Assembly GetMonoSQLiteAssembly()
         {
             if (!monoDetector.IsExecutingWithMono())
@@ -31,9 +39,13 @@ namespace CSF.NHibernate
             throw new InvalidOperationException("Cannot load the Mono SQLite assembly 'Mono.Data.Sqlite'.");
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MonoSQLiteAssemblyFinder"/> class.
+        /// </summary>
+        /// <param name="monoDetector">An optional service which detects the Mono runtime.  If not provided then a default detector will be used.</param>
         public MonoSQLiteAssemblyFinder(IDetectsMono monoDetector = null)
         {
-            monoDetector = monoDetector ?? new MonoRuntimeDetector();
+            this.monoDetector = monoDetector ?? new MonoRuntimeDetector();
         }
     }
 }

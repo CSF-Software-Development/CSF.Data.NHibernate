@@ -43,65 +43,39 @@ namespace CSF.NHibernate
         /// <param name="x">The x coordinate.</param>
         public int GetHashCode(object x) => (x?.GetHashCode()).GetValueOrDefault();
 
+
 #if NHIBERNATE4
-
         /// <summary>
         /// Retrieve an instance of the mapped class from a ADO resultset.
-        /// Implementors should handle possibility of null values.
         /// </summary>
-        /// <param name="rs">a IDataReader</param>
-        /// <param name="names">column names</param>
-        /// <param name="owner">the containing entity</param>
-        /// <returns></returns>
-        /// <exception cref="T:NHibernate.HibernateException">HibernateException</exception>
+        /// <param name="rs">An ADO data-reader object</param>
+        /// <param name="names">An array of the column names from which to get data</param>
+        /// <param name="owner">The containing entity</param>
+        /// <returns>A <see cref="Fraction"/>, or a null reference.</returns>
+        /// <exception cref="HibernateException"></exception>
         public object NullSafeGet(IDataReader rs, string[] names, object owner)
-        {
-            long?
-                numerator = (long?) NHibernateUtil.Int64.NullSafeGet(rs, names[0]),
-                denominator = (long?) NHibernateUtil.Int64.NullSafeGet(rs, names[1]);
-
-            if (!numerator.HasValue || !denominator.HasValue)
-                return null;
-
-            return new Fraction(numerator.Value, denominator.Value);
-        }
-
-        /// <summary>
-        /// Write an instance of the mapped class to a prepared statement.
-        ///  Implementors should handle possibility of null values.
-        ///  A multi-column type should be written to parameters starting from index.
-        /// </summary>
-        /// <param name="cmd">a IDbCommand</param>
-        /// <param name="value">the object to write</param>
-        /// <param name="index">command parameter index</param>
-        /// <exception cref="T:NHibernate.HibernateException">HibernateException</exception>
-        public void NullSafeSet(IDbCommand cmd, object value, int index)
-        {
-            if(!(value is Fraction fraction))
-            {
-                NHibernateUtil.Int64.NullSafeSet(cmd, null, index);
-                return;
-            }
-
-            NHibernateUtil.Int64.NullSafeSet(cmd, GetFractionPart(fraction, index), index);
-        }
-
 #elif NHIBERNATE5
-
         /// <summary>
         /// Retrieve an instance of the mapped class from a ADO resultset.
-        /// Implementors should handle possibility of null values.
         /// </summary>
-        /// <param name="rs">a IDataReader</param>
-        /// <param name="names">column names</param>
-        /// <param name="owner">the containing entity</param>
-        /// <returns></returns>
-        /// <exception cref="T:NHibernate.HibernateException">HibernateException</exception>
+        /// <param name="rs">An ADO data-reader object</param>
+        /// <param name="names">An array of the column names from which to get data</param>
+        /// <param name="owner">The containing entity</param>
+        /// <param name="session">A session implementor</param>
+        /// <returns>A <see cref="Fraction"/>, or a null reference.</returns>
+        /// <exception cref="HibernateException"></exception>
         public object NullSafeGet(DbDataReader rs, string[] names, ISessionImplementor session, object owner)
+#endif
         {
+#if NHIBERNATE4
+            long?
+                numerator = (long?)NHibernateUtil.Int64.NullSafeGet(rs, names[0]),
+                denominator = (long?)NHibernateUtil.Int64.NullSafeGet(rs, names[1]);
+#elif NHIBERNATE5
             long?
                 numerator = (long?) NHibernateUtil.Int64.NullSafeGet(rs, names[0], session),
                 denominator = (long?) NHibernateUtil.Int64.NullSafeGet(rs, names[1], session);
+#endif
 
             if (!numerator.HasValue || !denominator.HasValue)
                 return null;
@@ -109,27 +83,43 @@ namespace CSF.NHibernate
             return new Fraction(numerator.Value, denominator.Value);
         }
 
+#if NHIBERNATE4
         /// <summary>
         /// Write an instance of the mapped class to a prepared statement.
-        ///  Implementors should handle possibility of null values.
-        ///  A multi-column type should be written to parameters starting from index.
         /// </summary>
-        /// <param name="cmd">a IDbCommand</param>
-        /// <param name="value">the object to write</param>
-        /// <param name="index">command parameter index</param>
-        /// <exception cref="T:NHibernate.HibernateException">HibernateException</exception>
+        /// <param name="cmd">An ADO database command object</param>
+        /// <param name="value">The object to write</param>
+        /// <param name="index">The zero-based index of the column (used for multi-column writes)</param>
+        /// <exception cref="HibernateException"></exception>
+        public void NullSafeSet(IDbCommand cmd, object value, int index)
+#elif NHIBERNATE5
+        /// <summary>
+        /// Write an instance of the mapped class to a prepared statement.
+        /// </summary>
+        /// <param name="cmd">An ADO database command object</param>
+        /// <param name="value">The object to write</param>
+        /// <param name="index">The zero-based index of the column (used for multi-column writes)</param>
+        /// <param name="session">A session implementor</param>
+        /// <exception cref="HibernateException"></exception>
         public void NullSafeSet(DbCommand cmd, object value, int index, ISessionImplementor session)
+#endif
         {
-            if(!(value is Fraction fraction))
+            if (!(value is Fraction fraction))
             {
+#if NHIBERNATE4
+                NHibernateUtil.Int64.NullSafeSet(cmd, null, index);
+#elif NHIBERNATE5
                 NHibernateUtil.Int64.NullSafeSet(cmd, null, index, session);
+#endif
                 return;
             }
 
+#if NHIBERNATE4
+            NHibernateUtil.Int64.NullSafeSet(cmd, GetFractionPart(fraction, index), index);
+#elif NHIBERNATE5
             NHibernateUtil.Int64.NullSafeSet(cmd, GetFractionPart(fraction, index), index, session);
-        }
-
 #endif
+        }
 
         long GetFractionPart(Fraction fraction, int columnIndex)
         {
