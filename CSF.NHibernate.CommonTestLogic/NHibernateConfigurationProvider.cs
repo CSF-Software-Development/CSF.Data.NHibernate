@@ -1,18 +1,21 @@
 ﻿using System;
-using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
+using static NHibernate.Cfg.Environment;
 
-namespace CSF.NHibernate.Tests
+namespace CSF.NHibernate
 {
     public class NHibernateConfigurationProvider
     {
+        readonly IAddsMappings mappingProvider;
+
         public virtual Configuration GetConfiguration()
         {
             var config = new Configuration();
 
             AddDbDriver(config);
-            AddMappings(config);
+            mappingProvider.AddMappings(config);
+            return config;
         }
 
         protected virtual void AddDbDriver(Configuration config)
@@ -22,12 +25,12 @@ namespace CSF.NHibernate.Tests
                 x.ConnectionString = "Data Source=:memory:;Version=3;New=True;";
                 x.Dialect<SQLiteDialect>();
             });
-            config.SetProperty(env.ReleaseConnections, "on_close");
+            config.SetProperty(ReleaseConnections, "on_close");
         }
 
-        protected virtual void AddMappings(Configuration config)
+        public NHibernateConfigurationProvider(IAddsMappings mappingProvider)
         {
-            throw new NotImplementedException();
+            this.mappingProvider = mappingProvider ?? throw new ArgumentNullException(nameof(mappingProvider));
         }
     }
 }

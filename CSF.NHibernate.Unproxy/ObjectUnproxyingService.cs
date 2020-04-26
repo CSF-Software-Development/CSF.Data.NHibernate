@@ -13,7 +13,6 @@ namespace CSF.NHibernate
     public class ObjectUnproxyingService : IUnproxiesObject
     {
         readonly ISession session;
-        readonly IStatelessSession statelessSession;
 
         /// <summary>
         /// 'Unproxy' the specified object and get a representation of the same
@@ -37,7 +36,7 @@ namespace CSF.NHibernate
         }
 
         ISessionImplementor GetSessionImplementor()
-            => session?.GetSessionImplementation() ?? statelessSession?.GetSessionImplementation();
+            => session?.GetSessionImplementation();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectUnproxyingService"/> class from an NHibernate <see cref="ISession"/>.
@@ -46,15 +45,6 @@ namespace CSF.NHibernate
         public ObjectUnproxyingService(ISession session)
         {
             this.session = session ?? throw new ArgumentNullException(nameof(session));
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ObjectUnproxyingService"/> class from an NHibernate <see cref="IStatelessSession"/>.
-        /// </summary>
-        /// <param name="session">An NHibernate stateless session.</param>
-        public ObjectUnproxyingService(IStatelessSession session)
-        {
-            statelessSession = session ?? throw new ArgumentNullException(nameof(session));
         }
     }
 }

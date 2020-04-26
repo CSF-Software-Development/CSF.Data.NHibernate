@@ -2,6 +2,39 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <ReleaseVersion>6.1.3</ReleaseVersion>
   </PropertyGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="4.11.0" />
+    <PackageReference Include="AutoFixture.AutoMoq" Version="4.11.0" />
+    <PackageReference Include="AutoFixture.NUnit3" Version="4.11.0" />
+    <PackageReference Include="coverlet.msbuild" Version="2.8.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Moq" Version="4.13.1" />
+    <PackageReference Include="NunitXml.TestLogger" Version="2.1.41" />
+    <PackageReference Include="NHibernate" Version="5.0.0">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+    <PackageReference Include="Iesi.Collections" Version="4.0.0.4000">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" />
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.112" />
+  </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CSF.NHibernate.CommonTestLogic\CSF.NHibernate.CommonTestLogic.csproj" />
+    <ProjectReference Include="..\CSF.Guids.NHibernate5\CSF.Guids.NHibernate5.csproj" />
+    <ProjectReference Include="..\CSF.NHibernate.Unproxy\CSF.NHibernate.Unproxy.csproj" />
+    <ProjectReference Include="..\CSF.PrimesAndFractions.NHibernate5\CSF.PrimesAndFractions.NHibernate5.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mappings\" />
+  </ItemGroup>
 </Project>

@@ -1,26 +1,22 @@
 ﻿using System;
+using System.Data;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 
-namespace CSF.NHibernate.CommonTestLogic
+namespace CSF.NHibernate
 {
     public class SchemaCreator
     {
-        public virtual void CreateSchema(Configuration config, ISessionFactory sessionFactory)
+        public virtual void CreateSchema(Configuration config, IDbConnection connection)
         {
             if (config == null)
                 throw new ArgumentNullException(nameof(config));
-            if (sessionFactory == null)
-                throw new ArgumentNullException(nameof(sessionFactory));
+            if (connection == null)
+                throw new ArgumentNullException(nameof(connection));
 
-            using (var session = sessionFactory.OpenSession())
-            {
-                var connection = session.Connection;
-                var exporter = new SchemaExport(config);
-
-                exporter.Execute(false, true, false, connection, null);
-            }
+            var exporter = new SchemaExport(config);
+            exporter.Execute(false, true, false, connection, null);
         }
     }
 }
