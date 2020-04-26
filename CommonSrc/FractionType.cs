@@ -15,7 +15,12 @@ namespace CSF.NHibernate
     /// </summary>
     public class FractionType : IUserType
     {
-        static readonly SqlType[] Types = { new SqlType(DbType.Int64), new SqlType(DbType.Int64) };
+        static readonly SqlType[] Types = {
+            new SqlType(DbType.Int64),
+            new SqlType(DbType.Int64),
+            new SqlType(DbType.Int64),
+            new SqlType(DbType.Boolean),
+        };
 
         /// <summary>
         /// Gets a collection of the SQL column types used to store the value.
@@ -34,7 +39,7 @@ namespace CSF.NHibernate
         /// </summary>
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
-        public new bool Equals(object x, object y) => Equals(x, y);
+        public new bool Equals(object x, object y) => Object.Equals(x, y);
 
         /// <summary>
         /// Get a hashcode for the instance, consistent with persistence "equality"
@@ -69,18 +74,22 @@ namespace CSF.NHibernate
         {
 #if NHIBERNATE4
             long?
-                numerator = (long?)NHibernateUtil.Int64.NullSafeGet(rs, names[0]),
-                denominator = (long?)NHibernateUtil.Int64.NullSafeGet(rs, names[1]);
+                integer = (long?)NHibernateUtil.Int64.NullSafeGet(rs, names[0]),
+                numerator = (long?)NHibernateUtil.Int64.NullSafeGet(rs, names[1]),
+                denominator = (long?)NHibernateUtil.Int64.NullSafeGet(rs, names[2]); 
+            bool? isNegative = (bool?)NHibernateUtil.Boolean.NullSafeGet(rs, names[3]);
 #elif NHIBERNATE5
             long?
-                numerator = (long?) NHibernateUtil.Int64.NullSafeGet(rs, names[0], session),
-                denominator = (long?) NHibernateUtil.Int64.NullSafeGet(rs, names[1], session);
+                integer = (long?)NHibernateUtil.Int64.NullSafeGet(rs, names[0], session),
+                numerator = (long?)NHibernateUtil.Int64.NullSafeGet(rs, names[1], session),
+                denominator = (long?)NHibernateUtil.Int64.NullSafeGet(rs, names[2], session); 
+            bool? isNegative = (bool?)NHibernateUtil.Boolean.NullSafeGet(rs, names[3], session);
 #endif
 
-            if (!numerator.HasValue || !denominator.HasValue)
+            if (!numerator.HasValue || !denominator.HasValue || !integer.HasValue || !isNegative.HasValue)
                 return null;
 
-            return new Fraction(numerator.Value, denominator.Value);
+            return new Fraction(integer.Value, numerator.Value, denominator.Value, isNegative.Value);
         }
 
 #if NHIBERNATE4
@@ -115,17 +124,16 @@ namespace CSF.NHibernate
             }
 
 #if NHIBERNATE4
-            NHibernateUtil.Int64.NullSafeSet(cmd, GetFractionPart(fraction, index), index);
+            if (index == 0) NHibernateUtil.Int64.NullSafeSet(cmd, fraction.AbsoluteInteger, index);
+            if (index == 1) NHibernateUtil.Int64.NullSafeSet(cmd, fraction.Numerator, index);
+            if (index == 2) NHibernateUtil.Int64.NullSafeSet(cmd, fraction.Denominator, index);
+            if (index == 3) NHibernateUtil.Boolean.NullSafeSet(cmd, fraction.IsNegative, index);
 #elif NHIBERNATE5
-            NHibernateUtil.Int64.NullSafeSet(cmd, GetFractionPart(fraction, index), index, session);
+            if (index == 0) NHibernateUtil.Int64.NullSafeSet(cmd, fraction.AbsoluteInteger, index, session);
+            if (index == 1) NHibernateUtil.Int64.NullSafeSet(cmd, fraction.Numerator, index, session);
+            if (index == 2) NHibernateUtil.Int64.NullSafeSet(cmd, fraction.Denominator, index, session);
+            if (index == 3) NHibernateUtil.Boolean.NullSafeSet(cmd, fraction.IsNegative, index, session);
 #endif
-        }
-
-        long GetFractionPart(Fraction fraction, int columnIndex)
-        {
-            if (columnIndex == 0) return fraction.Numerator;
-            if (columnIndex == 1) return fraction.Denominator;
-            throw new ArgumentOutOfRangeException(nameof(columnIndex), "The column index must be either zero or one.");
         }
 
         /// <summary>

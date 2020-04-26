@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <ReleaseVersion>6.1.3</ReleaseVersion>
-    <RootNamespace>CSF.NHibernate</RootNamespace>
+    <RootNamespace>CSF.NHibernate4</RootNamespace>
   </PropertyGroup>
   
   <ItemGroup>
@@ -27,6 +27,7 @@
     </PackageReference>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.112" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
   </ItemGroup>
   
   <ItemGroup>

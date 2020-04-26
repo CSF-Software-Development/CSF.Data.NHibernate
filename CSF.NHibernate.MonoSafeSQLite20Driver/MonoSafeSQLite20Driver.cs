@@ -110,7 +110,7 @@ namespace CSF.NHibernate
         /// <returns>The parameter name.</returns>
         /// <param name="index">Index.</param>
         public string GetParameterName(int index)
-            => GetParameterName(index);
+            => ((ISqlParameterFormatter) wrappedDriver).GetParameterName(index);
 
         /// <summary>
         /// Gets the result sets command.

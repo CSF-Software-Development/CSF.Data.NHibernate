@@ -2,13 +2,13 @@
 using CSF.NHibernate.Model;
 using NUnit.Framework;
 
-namespace CSF.NHibernate
+namespace CSF.NHibernate4
 {
     [TestFixture,NonParallelizable]
     public class FractionTypeTests
     {
-        [Test, AutoMoqData]
-        public void Session_can_persist_and_load_entity_which_contains_fraction(Fraction fraction, FractionEntity entity)
+        [Test,AutoMoqData]
+        public void Session_can_persist_and_load_entity_which_contains_fraction(FractionEntity entity, Fraction fraction)
         {
             using (var session = SessionProvider.Default.GetSession())
             {

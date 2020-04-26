@@ -25,7 +25,7 @@ namespace CSF.NHibernate
         {
             return assembly.GetExportedTypes()
                 .Where(new IsConcreteClassSpecification())
-                .Where(x => x.Namespace.StartsWith("CSF.NHibernate.Mappings", StringComparison.InvariantCulture))
+                .Where(x => x.Namespace.EndsWith("Mappings", StringComparison.InvariantCulture))
                 .ToList();
         }
 

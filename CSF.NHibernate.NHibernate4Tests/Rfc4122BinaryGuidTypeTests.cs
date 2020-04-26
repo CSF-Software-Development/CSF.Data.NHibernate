@@ -2,7 +2,7 @@
 using CSF.NHibernate.Model;
 using NUnit.Framework;
 
-namespace CSF.NHibernate
+namespace CSF.NHibernate4
 {
     [TestFixture,NonParallelizable]
     public class Rfc4122BinaryGuidTypeTests

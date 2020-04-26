@@ -1,8 +1,9 @@
 ﻿using System;
+using CSF.NHibernate;
 using CSF.NHibernate.Model;
 using NHibernate.Mapping.ByCode.Conformist;
 
-namespace CSF.NHibernate.NHibernate4Tests.Mappings
+namespace CSF.NHibernate4.Mappings
 {
     public class GuidEntityMap : ClassMapping<GuidEntity>
     {

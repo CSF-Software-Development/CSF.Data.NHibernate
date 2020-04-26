@@ -1,8 +1,9 @@
 ﻿using System;
+using CSF.NHibernate;
 using CSF.NHibernate.Model;
 using NUnit.Framework;
 
-namespace CSF.NHibernate
+namespace CSF.NHibernate4
 {
     [TestFixture,NonParallelizable]
     public class ObjectUnproxyingServiceTests

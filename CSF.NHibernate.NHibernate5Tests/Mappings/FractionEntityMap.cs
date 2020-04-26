@@ -1,8 +1,9 @@
 ﻿using System;
+using CSF.NHibernate;
 using CSF.NHibernate.Model;
 using NHibernate.Mapping.ByCode.Conformist;
 
-namespace CSF.NHibernate.Mappings
+namespace CSF.NHibernate5.Mappings
 {
     public class FractionEntityMap : ClassMapping<FractionEntity>
     {
@@ -12,7 +13,10 @@ namespace CSF.NHibernate.Mappings
 
             Property(x => x.Fraction, m => {
                 m.Type<FractionType>();
-                m.Columns(c => c.Name("FractionNumerator"), c => c.Name("FractionDenominator"));
+                m.Columns(c => c.Name("FractionInteger"),
+                          c => c.Name("FractionNumerator"),
+                          c => c.Name("FractionDenominator"),
+                          c => c.Name("FractionIsNegative"));
             });
         }
     }

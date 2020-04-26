@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Reflection;
+using CSF.NHibernate;
 using NHibernate;
 using NHibernate.Cfg;
 
-namespace CSF.NHibernate
+namespace CSF.NHibernate4
 {
     public class SessionProvider
     {
@@ -19,15 +20,6 @@ namespace CSF.NHibernate
             return session;
         }
 
-        public IStatelessSession GetStatelessSession()
-        {
-            var session = sessionFactory.OpenStatelessSession();
-            var schemaCreator = new SchemaCreator();
-            schemaCreator.CreateSchema(config, session.Connection);
-
-            return session;
-        }
-
         private SessionProvider()
         {
             var mappingProvider = new AssemblyMappingsProvider(Assembly.GetExecutingAssembly());
@@ -37,6 +29,15 @@ namespace CSF.NHibernate
             sessionFactory = config.BuildSessionFactory();
         }
 
-        public static SessionProvider Default { get; } = new SessionProvider();
+        static SessionProvider defaultInstance;
+        public static SessionProvider Default
+        {
+            get
+            {
+                if (defaultInstance == null)
+                    defaultInstance = new SessionProvider();
+                return defaultInstance;
+            }
+        }
     }
 }

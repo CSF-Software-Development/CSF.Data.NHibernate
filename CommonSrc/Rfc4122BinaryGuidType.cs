@@ -36,7 +36,7 @@ namespace CSF.NHibernate
         /// </summary>
         /// <param name="x">The first object.</param>
         /// <param name="y">The second object.</param>
-        public new bool Equals(object x, object y) => Equals(x, y);
+        public new bool Equals(object x, object y) => Object.Equals(x, y);
 
         /// <summary>
         /// Get a hashcode for the instance, consistent with persistence "equality"
