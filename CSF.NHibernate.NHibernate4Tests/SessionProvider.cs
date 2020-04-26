@@ -23,7 +23,8 @@ namespace CSF.NHibernate4
         private SessionProvider()
         {
             var mappingProvider = new AssemblyMappingsProvider(Assembly.GetExecutingAssembly());
-            var configProvider = new NHibernateConfigurationProvider(mappingProvider);
+            var driverProvider = new DriverProvider();
+            var configProvider = new NHibernateConfigurationProvider(mappingProvider, driverProvider);
 
             config = configProvider.GetConfiguration();
             sessionFactory = config.BuildSessionFactory();
@@ -37,6 +38,19 @@ namespace CSF.NHibernate4
                 if (defaultInstance == null)
                     defaultInstance = new SessionProvider();
                 return defaultInstance;
+            }
+        }
+
+        class DriverProvider : IAddsDbDriver
+        {
+            public void AddDriver(Configuration config)
+            {
+                config.DataBaseIntegration(x => {
+                    x.Driver<MonoSafeSQLite20Driver>();
+                    x.ConnectionString = "Data Source=:memory:;Version=3;New=True;";
+                    x.Dialect<SQLiteDialect>();
+                });
+                config.SetProperty(ReleaseConnections, "on_close");
             }
         }
     }

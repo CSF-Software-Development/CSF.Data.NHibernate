@@ -22,9 +22,6 @@
     <PackageReference Include="CSF.ReflectionSpecifications" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CSF.NHibernate.MonoSafeSQLite20Driver\CSF.NHibernate.MonoSafeSQLite20Driver.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Model\" />
   </ItemGroup>
 </Project>

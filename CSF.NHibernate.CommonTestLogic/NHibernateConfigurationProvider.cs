@@ -8,29 +8,22 @@ namespace CSF.NHibernate
     public class NHibernateConfigurationProvider
     {
         readonly IAddsMappings mappingProvider;
+        readonly IAddsDbDriver driverProvider;
 
         public virtual Configuration GetConfiguration()
         {
             var config = new Configuration();
 
-            AddDbDriver(config);
+            driverProvider.AddDriver(config);
             mappingProvider.AddMappings(config);
+
             return config;
         }
 
-        protected virtual void AddDbDriver(Configuration config)
-        {
-            config.DataBaseIntegration(x => {
-                x.Driver<MonoSafeSQLite20Driver>();
-                x.ConnectionString = "Data Source=:memory:;Version=3;New=True;";
-                x.Dialect<SQLiteDialect>();
-            });
-            config.SetProperty(ReleaseConnections, "on_close");
-        }
-
-        public NHibernateConfigurationProvider(IAddsMappings mappingProvider)
+        public NHibernateConfigurationProvider(IAddsMappings mappingProvider, IAddsDbDriver driverProvider)
         {
             this.mappingProvider = mappingProvider ?? throw new ArgumentNullException(nameof(mappingProvider));
+            this.driverProvider = driverProvider ?? throw new ArgumentNullException(nameof(driverProvider));
         }
     }
 }

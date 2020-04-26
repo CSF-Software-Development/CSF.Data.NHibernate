@@ -32,10 +32,10 @@
   
   <ItemGroup>
     <ProjectReference Include="..\CSF.Guids.NHibernate4\CSF.Guids.NHibernate4.csproj" />
-    <ProjectReference Include="..\CSF.NHibernate.MonoSafeSQLite20Driver\CSF.NHibernate.MonoSafeSQLite20Driver.csproj" />
     <ProjectReference Include="..\CSF.NHibernate.Unproxy\CSF.NHibernate.Unproxy.csproj" />
     <ProjectReference Include="..\CSF.PrimesAndFractions.NHibernate4\CSF.PrimesAndFractions.NHibernate4.csproj" />
     <ProjectReference Include="..\CSF.NHibernate.CommonTestLogic\CSF.NHibernate.CommonTestLogic.csproj" />
+    <ProjectReference Include="..\CSF.NHibernate4.MonoSafeSQLite20Driver\CSF.NHibernate4.MonoSafeSQLite20Driver.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mappings\" />

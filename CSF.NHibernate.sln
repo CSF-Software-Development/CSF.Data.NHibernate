@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Guids.NHibernate4", "CS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate.Unproxy", "CSF.NHibernate.Unproxy\CSF.NHibernate.Unproxy.csproj", "{9E9B6635-5800-43BE-BF31-B2F80A5608D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate.MonoSafeSQLite20Driver", "CSF.NHibernate.MonoSafeSQLite20Driver\CSF.NHibernate.MonoSafeSQLite20Driver.csproj", "{C1CEDF6C-5455-493F-9E04-5FDCE0F12EDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate4.MonoSafeSQLite20Driver", "CSF.NHibernate4.MonoSafeSQLite20Driver\CSF.NHibernate4.MonoSafeSQLite20Driver.csproj", "{C1CEDF6C-5455-493F-9E04-5FDCE0F12EDD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate.NHibernate4Tests", "CSF.NHibernate.NHibernate4Tests\CSF.NHibernate.NHibernate4Tests.csproj", "{41069006-1043-47E7-81B5-307130359103}"
 EndProject
@@ -27,6 +27,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A7461300-5AC1-44D1-8845-40847792EA7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate.CommonTestLogic", "CSF.NHibernate.CommonTestLogic\CSF.NHibernate.CommonTestLogic.csproj", "{1F3EBCE8-9046-4C70-A346-148AD551940C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate5.MonoSafeSQLite20Driver", "CSF.NHibernate5.MonoSafeSQLite20Driver\CSF.NHibernate5.MonoSafeSQLite20Driver.csproj", "{8EA55CD8-ABBA-4C97-9B4E-642D2D79C74B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +72,10 @@ Global
 		{1F3EBCE8-9046-4C70-A346-148AD551940C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F3EBCE8-9046-4C70-A346-148AD551940C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F3EBCE8-9046-4C70-A346-148AD551940C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA55CD8-ABBA-4C97-9B4E-642D2D79C74B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA55CD8-ABBA-4C97-9B4E-642D2D79C74B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA55CD8-ABBA-4C97-9B4E-642D2D79C74B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA55CD8-ABBA-4C97-9B4E-642D2D79C74B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

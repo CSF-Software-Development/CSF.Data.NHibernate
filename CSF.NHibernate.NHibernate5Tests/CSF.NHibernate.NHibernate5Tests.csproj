@@ -35,6 +35,7 @@
     <ProjectReference Include="..\CSF.Guids.NHibernate5\CSF.Guids.NHibernate5.csproj" />
     <ProjectReference Include="..\CSF.NHibernate.Unproxy\CSF.NHibernate.Unproxy.csproj" />
     <ProjectReference Include="..\CSF.PrimesAndFractions.NHibernate5\CSF.PrimesAndFractions.NHibernate5.csproj" />
+    <ProjectReference Include="..\CSF.NHibernate5.MonoSafeSQLite20Driver\CSF.NHibernate5.MonoSafeSQLite20Driver.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mappings\" />
