@@ -107,7 +107,7 @@ namespace CSF.NHibernate
         /// </summary>
         /// <param name="cmd">An ADO database command object</param>
         /// <param name="value">The object to write</param>
-        /// <param name="index">The zero-based index of the column (used for multi-column writes)</param>
+        /// <param name="index">The zero-based index of the current parameter position</param>
         /// <param name="session">A session implementor</param>
         /// <exception cref="HibernateException"></exception>
         public void NullSafeSet(DbCommand cmd, object value, int index, ISessionImplementor session)
@@ -124,15 +124,15 @@ namespace CSF.NHibernate
             }
 
 #if NHIBERNATE4
-            if (index == 0) NHibernateUtil.Int64.NullSafeSet(cmd, fraction.AbsoluteInteger, index);
-            if (index == 1) NHibernateUtil.Int64.NullSafeSet(cmd, fraction.Numerator, index);
-            if (index == 2) NHibernateUtil.Int64.NullSafeSet(cmd, fraction.Denominator, index);
-            if (index == 3) NHibernateUtil.Boolean.NullSafeSet(cmd, fraction.IsNegative, index);
+            NHibernateUtil.Int64.NullSafeSet(cmd, fraction.AbsoluteInteger, index);
+            NHibernateUtil.Int64.NullSafeSet(cmd, fraction.Numerator, index + 1);
+            NHibernateUtil.Int64.NullSafeSet(cmd, fraction.Denominator, index + 2);
+            NHibernateUtil.Boolean.NullSafeSet(cmd, fraction.IsNegative, index + 3);
 #elif NHIBERNATE5
-            if (index == 0) NHibernateUtil.Int64.NullSafeSet(cmd, fraction.AbsoluteInteger, index, session);
-            if (index == 1) NHibernateUtil.Int64.NullSafeSet(cmd, fraction.Numerator, index, session);
-            if (index == 2) NHibernateUtil.Int64.NullSafeSet(cmd, fraction.Denominator, index, session);
-            if (index == 3) NHibernateUtil.Boolean.NullSafeSet(cmd, fraction.IsNegative, index, session);
+            NHibernateUtil.Int64.NullSafeSet(cmd, fraction.AbsoluteInteger, index, session);
+            NHibernateUtil.Int64.NullSafeSet(cmd, fraction.Numerator, index + 1, session);
+            NHibernateUtil.Int64.NullSafeSet(cmd, fraction.Denominator, index + 2, session);
+            NHibernateUtil.Boolean.NullSafeSet(cmd, fraction.IsNegative, index + 3, session);
 #endif
         }
 

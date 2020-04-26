@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Reflection;
 using CSF.NHibernate;
 using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Dialect;
+using NHibernate.SqlCommand;
+using NHibernate.Type;
+using static NHibernate.Cfg.Environment;
 
 namespace CSF.NHibernate4
 {

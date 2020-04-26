@@ -18,6 +18,8 @@ namespace CSF.NHibernate4.Mappings
                           c => c.Name("FractionDenominator"),
                           c => c.Name("FractionIsNegative"));
             });
+
+            Property(x => x.Name);
         }
     }
 }

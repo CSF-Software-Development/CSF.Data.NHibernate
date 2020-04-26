@@ -3,6 +3,8 @@ using System.Reflection;
 using CSF.NHibernate;
 using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Dialect;
+using static NHibernate.Cfg.Environment;
 
 namespace CSF.NHibernate5
 {

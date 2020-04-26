@@ -1,7 +1,6 @@
 ﻿using System;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
-using static NHibernate.Cfg.Environment;
 
 namespace CSF.NHibernate
 {

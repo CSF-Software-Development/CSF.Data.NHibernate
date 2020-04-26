@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <ReleaseVersion>6.1.3</ReleaseVersion>
     <RootNamespace>CSF.NHibernate4</RootNamespace>
   </PropertyGroup>
@@ -37,7 +37,14 @@
     <ProjectReference Include="..\CSF.NHibernate.CommonTestLogic\CSF.NHibernate.CommonTestLogic.csproj" />
     <ProjectReference Include="..\CSF.NHibernate4.MonoSafeSQLite20Driver\CSF.NHibernate4.MonoSafeSQLite20Driver.csproj" />
   </ItemGroup>
+    
+  <ItemGroup>
+    <Reference Include="netstandard" />
+  </ItemGroup>
+    
   <ItemGroup>
     <Folder Include="Mappings\" />
   </ItemGroup>
+
+  <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
 </Project>
