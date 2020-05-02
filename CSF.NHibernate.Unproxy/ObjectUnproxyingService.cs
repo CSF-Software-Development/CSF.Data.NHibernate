@@ -31,12 +31,23 @@ namespace CSF.NHibernate
             if (!(obj is INHibernateProxy))
                 return obj;
 
-            var impl = GetSessionImplementor();
-            return (impl?.PersistenceContext is null)? obj : (T)impl.PersistenceContext.Unproxy(obj);
+            var context = GetPersistenceContext();
+            return (T) context.Unproxy(obj);
         }
 
-        ISessionImplementor GetSessionImplementor()
-            => session?.GetSessionImplementation();
+        /// <summary>
+        /// Gets a persistence context.  This implementation will raise an exception if the context is null.
+        /// </summary>
+        /// <returns>The persistence context.</returns>
+        /// <exception cref="InvalidOperationException">If no context can be retrieved.</exception>
+        protected virtual IPersistenceContext GetPersistenceContext()
+        {
+            var context = session.GetSessionImplementation()?.PersistenceContext;
+            if(context is null)
+                throw new InvalidOperationException($@"Cannot unproxy; a compatible implementation of {nameof(ISession)} must be provided.
+The expression `session?.{nameof(ISession.GetSessionImplementation)}()?.{nameof(ISessionImplementor.PersistenceContext)}` must not return a null reference.");
+            return context;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectUnproxyingService"/> class from an NHibernate <see cref="ISession"/>.
