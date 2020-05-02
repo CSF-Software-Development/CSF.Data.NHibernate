@@ -37,6 +37,14 @@
     <PackageReference Include="CSF.Reflection" Version="3.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\CommonSrc\MonoSQLiteAssemblyFinder.cs">
+      <Link>MonoSQLiteAssemblyFinder.cs</Link>
+    </Compile>
+    <Compile Include="..\CommonSrc\MonoSQLiteDriver.cs">
+      <Link>MonoSQLiteDriver.cs</Link>
+    </Compile>
+  </ItemGroup>
   <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
 
 </Project>
