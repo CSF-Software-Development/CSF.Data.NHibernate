@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommonSrc", "CommonSrc", "{
 		CommonSrc\Rfc4122BinaryGuidType.cs = CommonSrc\Rfc4122BinaryGuidType.cs
 		CommonSrc\MonoSQLiteAssemblyFinder.cs = CommonSrc\MonoSQLiteAssemblyFinder.cs
 		CommonSrc\MonoSQLiteDriver.cs = CommonSrc\MonoSQLiteDriver.cs
+		CommonSrc\IGetsMonoSQLiteAssembly.cs = CommonSrc\IGetsMonoSQLiteAssembly.cs
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.Guids.NHibernate5", "CSF.Guids.NHibernate5\CSF.Guids.NHibernate5.csproj", "{C2290D37-42DD-4C7E-8D9B-7723EBD5ADDA}"

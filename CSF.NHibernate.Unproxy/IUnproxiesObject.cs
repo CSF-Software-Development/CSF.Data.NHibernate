@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CSF.NHibernate
+﻿namespace CSF.NHibernate
 {
     /// <summary>
     /// An object which can 'unwrap' an NHibernate proxy object and return a

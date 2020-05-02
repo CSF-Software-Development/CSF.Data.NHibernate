@@ -49,16 +49,48 @@ namespace CSF.NHibernate
         public bool SupportsMultipleQueries
             => wrappedDriver.SupportsMultipleQueries;
 
+        /// <summary>
+        /// Does this driver mandates <see cref="T:System.TimeSpan" /> values for time?
+        /// </summary>
         public bool RequiresTimeSpanForTime => wrappedDriver.RequiresTimeSpanForTime;
 
+        /// <summary>
+        /// Does this driver support <see cref="T:System.Transactions.Transaction" />?
+        /// </summary>
         public bool SupportsSystemTransactions => wrappedDriver.SupportsSystemTransactions;
 
+        /// <summary>
+        /// Does this driver connections support enlisting with a <see langword="null" /> transaction?
+        /// </summary>
+        /// <remarks>Enlisting with <see langword="null" /> allows to leave a completed transaction and
+        /// starts accepting auto-committed statements.</remarks>
         public bool SupportsNullEnlistment => wrappedDriver.SupportsNullEnlistment;
 
+        /// <summary>
+        /// Does this driver connections support explicitly enlisting with a transaction when auto-enlistment
+        /// is disabled?
+        /// </summary>
         public bool SupportsEnlistmentWhenAutoEnlistmentIsDisabled => wrappedDriver.SupportsEnlistmentWhenAutoEnlistmentIsDisabled;
 
+        /// <summary>
+        /// Does sometimes this driver finish distributed transaction after end of scope disposal?
+        /// </summary>
+        /// <remarks>
+        /// See https://github.com/npgsql/npgsql/issues/1571#issuecomment-308651461 discussion with a Microsoft
+        /// employee: MSDTC considers a transaction to be committed once it has collected all participant votes
+        /// for committing from prepare phase. It then immediately notifies all participants of the outcome.
+        /// This causes TransactionScope.Dispose to leave while the second phase of participants may still
+        /// be executing. This means the transaction from the db view point can still be pending and not yet
+        /// committed after the scope disposal. This is by design of MSDTC and we have to cope with that.
+        /// Some data provider may have a global locking mechanism causing any subsequent use to wait for the
+        /// end of the commit phase, but this is not a general case. Some other, as Npgsql &lt; v3.2.5, may
+        /// crash due to this, because they re-use the connection in the second phase.
+        /// </remarks>
         public bool HasDelayedDistributedTransactionCompletion => wrappedDriver.HasDelayedDistributedTransactionCompletion;
 
+        /// <summary>
+        /// The minimal date supplied as a <see cref="T:System.DateTime" /> supported by this driver.
+        /// </summary>
         public DateTime MinDate => wrappedDriver.MinDate;
 
         /// <summary>
