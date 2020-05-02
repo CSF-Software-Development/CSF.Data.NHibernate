@@ -2,7 +2,7 @@
 using CSF.NHibernate.Model;
 using NUnit.Framework;
 
-namespace CSF.NHibernate4
+namespace CSF.NHibernate
 {
     [TestFixture,NonParallelizable]
     public class FractionTypeTests

@@ -9,7 +9,7 @@ using NHibernate.SqlCommand;
 using NHibernate.Type;
 using static NHibernate.Cfg.Environment;
 
-namespace CSF.NHibernate4
+namespace CSF.NHibernate
 {
     public class SessionProvider
     {

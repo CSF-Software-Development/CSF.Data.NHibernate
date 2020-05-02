@@ -6,7 +6,7 @@ using NHibernate.Cfg;
 using NHibernate.Dialect;
 using static NHibernate.Cfg.Environment;
 
-namespace CSF.NHibernate5
+namespace CSF.NHibernate
 {
     public class SessionProvider
     {

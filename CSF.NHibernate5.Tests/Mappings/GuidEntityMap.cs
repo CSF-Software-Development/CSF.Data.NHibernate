@@ -3,7 +3,7 @@ using CSF.NHibernate;
 using CSF.NHibernate.Model;
 using NHibernate.Mapping.ByCode.Conformist;
 
-namespace CSF.NHibernate5.Mappings
+namespace CSF.NHibernate.Mappings
 {
     public class GuidEntityMap : ClassMapping<GuidEntity>
     {

@@ -23,9 +23,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate.Unproxy", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate4.MonoSafeSQLite20Driver", "CSF.NHibernate4.MonoSafeSQLite20Driver\CSF.NHibernate4.MonoSafeSQLite20Driver.csproj", "{C1CEDF6C-5455-493F-9E04-5FDCE0F12EDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate.NHibernate4Tests", "CSF.NHibernate.NHibernate4Tests\CSF.NHibernate.NHibernate4Tests.csproj", "{41069006-1043-47E7-81B5-307130359103}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate4.Tests", "CSF.NHibernate4.Tests\CSF.NHibernate4.Tests.csproj", "{41069006-1043-47E7-81B5-307130359103}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate.NHibernate5Tests", "CSF.NHibernate.NHibernate5Tests\CSF.NHibernate.NHibernate5Tests.csproj", "{2981E836-3B49-452A-A79D-DDDFF3C18A49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSF.NHibernate5.Tests", "CSF.NHibernate5.Tests\CSF.NHibernate5.Tests.csproj", "{2981E836-3B49-452A-A79D-DDDFF3C18A49}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A7461300-5AC1-44D1-8845-40847792EA7C}"
 EndProject
