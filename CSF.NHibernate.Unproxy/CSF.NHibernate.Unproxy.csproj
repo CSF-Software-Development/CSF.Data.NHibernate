@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45;net461;netcoreapp2.0</TargetFrameworks>
-    <ReleaseVersion>6.1.3</ReleaseVersion>
+    <ReleaseVersion>7.0.0</ReleaseVersion>
     <PackageId>CSF.NHibernate.Unproxy</PackageId>
     <Authors>craigfowler</Authors>
     <Description>A very small convenience service to 'unproxy' NHibernate proxy objects.</Description>
