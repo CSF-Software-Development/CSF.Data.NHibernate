@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <ReleaseVersion>6.1.3</ReleaseVersion>
     <RootNamespace>CSF.NHibernate</RootNamespace>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
