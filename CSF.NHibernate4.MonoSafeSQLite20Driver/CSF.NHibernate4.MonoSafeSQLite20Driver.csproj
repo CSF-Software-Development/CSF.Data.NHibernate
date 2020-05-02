@@ -44,6 +44,9 @@
     <Compile Include="..\CommonSrc\MonoSQLiteDriver.cs">
       <Link>MonoSQLiteDriver.cs</Link>
     </Compile>
+    <Compile Include="..\CommonSrc\IGetsMonoSQLiteAssembly.cs">
+      <Link>IGetsMonoSQLiteAssembly.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
 
