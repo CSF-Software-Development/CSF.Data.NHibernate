@@ -11,7 +11,7 @@ This repository contains four small pieces of [NHibernate]-related functionality
     storing instances of `System.Guid` in a binary-data database column.  Specifically,
     they are stored in [RFC-4122] format.
 
-*   **CSF,NHibernate4.PrimesAndFractions** & **CSF,NHibernate5.PrimesAndFractions**
+*   **CSF.NHibernate4.PrimesAndFractions** & **CSF.NHibernate5.PrimesAndFractions**
 
     These packages contain implementations of `NHibernate.UserTypes.IUserType` for
     storing instances of `CSF.Fraction` (see [CSF.PrimesAndFractions]) in a database.
