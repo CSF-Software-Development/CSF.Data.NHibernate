@@ -6,15 +6,18 @@
 This repository contains four small pieces of [NHibernate]-related functionality.  Each is a little too small to have its own repository, although they are packaged independently.  Most of these packages have *two versions* available.  One for NHibernate version 4.x and one for NHibernate version 5.x.
 
 *   **CSF.NHibernate4.Guids** & **CSF.NHibernate5.Guids**
+
     These packages contain implementations of `NHibernate.UserTypes.IUserType` for
     storing instances of `System.Guid` in a binary-data database column.  Specifically,
     they are stored in [RFC-4122] format.
 
 *   **CSF,NHibernate4.PrimesAndFractions** & **CSF,NHibernate5.PrimesAndFractions**
+
     These packages contain implementations of `NHibernate.UserTypes.IUserType` for
     storing instances of `CSF.Fraction` (see [CSF.PrimesAndFractions]) in a database.
 
 *   **CSF.NHibernate4.MonoSafeSQLite20Driver** & **CSF.NHibernate5.MonoSafeSQLite20Driver**
+
     These packages contain a type named `CSF.NHibernate.MonoSafeSQLite20Driver` which
     works around an incompatibility between the Mono runtime on Linux and .NET Framework
     on Windows where it comes to the [SQLite] ADO database driver. Mono ships with a bundled
@@ -23,6 +26,7 @@ This repository contains four small pieces of [NHibernate]-related functionality
     this by detecting and using the appropriate driver for the currently-executing runtime.
 
 *   **CSF.NHibernate.Unproxy**
+
     This is a small convenience service, `CSF.NHibernate.ObjectUnproxyingService`, which
     uses an NHibernate ISession to 'unproxy' an object which could be an NHibernate proxy.
 
