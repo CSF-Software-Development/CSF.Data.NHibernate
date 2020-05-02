@@ -1,11 +1,11 @@
 language: csharp
-solution: CSF.Data.NHibernate.sln
+solution: CSF.NHibernate.sln
 
-install:
-  - nuget restore CSF.Data.NHibernate.sln
-  - nuget install NUnit.ConsoleRunner -Version 3.6.1 -OutputDirectory testrunner
-  - nuget install NUnit.Extension.NUnitV2Driver -Version 3.6.0 -OutputDirectory testrunner
+jobs:
+    include:
+        -   dotnet: 2.2.207
+            mono: latest
 
 script:
-  - xbuild /p:Configuration=Debug CSF.Data.NHibernate.sln
-  - mono "./testrunner/NUnit.ConsoleRunner.3.6.1/tools/nunit3-console.exe" Test.CSF.Data.NHibernate/bin/Debug/Test.CSF.Data.NHibernate.dll
+    -   dotnet build
+    -   dotnet test

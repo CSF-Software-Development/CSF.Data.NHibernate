@@ -1,53 +1,42 @@
-# CSF.Data.NHibernate
-This library contains types which are useful for interacting with [the NHibernate ORM].
+*Please be aware that much of the former functionality in this repository has moved to the **[CSF.ORM]** repository.  If you can't find what you were looking for, please look there instead.*
 
-[the NHibernate ORM]: http://nhibernate.info/
+[CSF.ORM]: https://github.com/csf-dev/CSF.ORM
 
-## IQuery implementation
-The main contents of this library is an implementation of `CSF.Data.IQuery`, which wraps an NHibernate `ISession`; this is the **NHibernateQuery** type.
-This allows an application to construct Linq queries from the ISession with two related benefits:
+## CSF.NHibernate
+This repository contains four small pieces of [NHibernate]-related functionality.  Each is a little too small to have its own repository, although they are packaged independently.  Most of these packages have *two versions* available.  One for NHibernate version 4.x and one for NHibernate version 5.x.
 
-* Firstly, it does not require a direct reference to the ISession, so alternate query implementations may be substituted.
-* Via a test-fake, this is not tied to NHibernate's extension methods, thus queries may be more easily mocked.
+*   **CSF.NHibernate4.Guids** & **CSF.NHibernate5.Guids**
 
-### NHibernate IQueryable<T> method wrappers
-Additionally to the above are a number of supporting types which permit usage of NHibernate's Linq API.
-This includes extension methods which wrap calls to `Fetch`, `FetchMany`, `ThenFetch` and `ThenFetchMany`, but which do not  raise exceptions if the query is not powered by a real NHibernate ISession.
-Likewise there are wrappers for `ToFuture` and `ToFutureValue` which do not require direct usage of NHibernate's own extension methods.
+    These packages contain implementations of `NHibernate.UserTypes.IUserType` for
+    storing instances of `System.Guid` in a binary-data database column.  Specifically,
+    they are stored in [RFC-4122] format.
 
-All of the wrapped functionality above becomes a no-operation if the query is not powered by a real NHibernate ISession.
-If it is a real ISession, then the appropriate functionality is called using NHibernate.
+*   **CSF.NHibernate4.PrimesAndFractions** & **CSF.NHibernate5.PrimesAndFractions**
 
-### AnyCount
-Finally, related to `IQuery`, is an extension method named `.AnyCount()`.
-This will behave just like Linq `.Any()` except that it forces counting of all of the instances and then returning truth if there is more than zero.
-For some database tables (such as legacy databases), where tables are very wide (many columns), NHibernate's default strategy for handling Linq 'Any' might not be suitable.
-By default, NHibernate performs a select-all-columns, limited to only the first row, and then returns true if it received any data.
-With extremely wide (but not very tall) tables though, and particularly where network bandwidth is limited, it may be cheaper to request the database perform a count and then act based on this information.
+    These packages contain implementations of `NHibernate.UserTypes.IUserType` for
+    storing instances of `CSF.Fraction` (see [CSF.PrimesAndFractions]) in a database.
 
-Please use AnyCount judiciously, it is not a silver bullet and your mileage may vary.
-The recommendation is, use the standard Linq `.Any()` as your go-to, and only try with `.AnyCount()` if you are noticing a serious performance hit.
+*   **CSF.NHibernate4.MonoSafeSQLite20Driver** & **CSF.NHibernate5.MonoSafeSQLite20Driver**
 
-## Other types
-There are some other miscellaneous small types in this library:
+    These packages contain a type named `CSF.NHibernate.MonoSafeSQLite20Driver` which
+    works around an incompatibility between the Mono runtime on Linux and .NET Framework
+    on Windows where it comes to the [SQLite] ADO database driver. Mono ships with a bundled
+    version of this driver, compatible with Mono.  The driver available via NuGet is not
+    compatible with Mono and will cause errors.  The Mono-safe NHibernate driver reconciles
+    this by detecting and using the appropriate driver for the currently-executing runtime.
 
-* **BinaryGuidType** - an `IUserType` for storing `System.Guid` instances as binary data.
-* **FractionType** - an `IUserType` for storing `CSF.Fraction` instances.
-* An extension method for `IDbIntegrationConfigurationProperties` - `SelectSQLiteDriver()` - which chooses either the Windows or Mono version of the driver.
+*   **CSF.NHibernate.Unproxy**
+
+    This is a small convenience service, `CSF.NHibernate.ObjectUnproxyingService`, which
+    uses an NHibernate ISession to 'unproxy' an object which could be an NHibernate proxy.
+
+[NHibernate]: https://github.com/nhibernate/nhibernate-core
+[RFC-4122]: https://en.wikipedia.org/wiki/Universally_unique_identifier
+[CSF.PrimesAndFractions]: https://github.com/csf-dev/PrimesAndFractions
+[SQLite]: https://www.sqlite.org/index.html
 
 ## Open source license
 All source files within this project are released as open source software,
 under the terms of [the MIT license].
 
 [the MIT license]: http://opensource.org/licenses/MIT
-
-This software is distributed in the hope that it will be useful, but please
-remember that:
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.

@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461;netcoreapp2.0</TargetFrameworks>
+    <ReleaseVersion>7.0.0</ReleaseVersion>
+    <PackageId>CSF.NHibernate5.PrimesAndFractions</PackageId>
+    <Authors>craigfowler</Authors>
+    <Description>A mapping type for the Fraction struct, for NHibernate 5.x</Description>
+    <Version>$(ReleaseVersion)</Version>
+    <PackageVersion>$(ReleaseVersion)</PackageVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright 2020 - CSF Software Limited</Copyright>
+    <PackageProjectUrl>https://github.com/csf-dev/CSF.Data.NHibernate/</PackageProjectUrl>
+    <RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\CSF-Software-OSS.snk</AssemblyOriginatorKeyFile>
+    <RootNamespace>CSF.NHibernate</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DefineConstants>TRACE;NHIBERNATE5;DEBUG</DefineConstants>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.NHibernate5.PrimesAndFractions.xml</DocumentationFile>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineConstants>NHIBERNATE5</DefineConstants>
+    <DebugType></DebugType>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.NHibernate5.PrimesAndFractions.xml</DocumentationFile>
+  </PropertyGroup>
+    
+  <ItemGroup>
+    <PackageReference Include="CSF.PrimesAndFractions" Version="1.0.0" />
+    <PackageReference Include="NHibernate" Version="5.0.0">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+    <PackageReference Include="Iesi.Collections" Version="4.0.0.4000">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+  </ItemGroup>
+    
+  <ItemGroup>
+    <Compile Include="..\CommonSrc\FractionType.cs">
+      <Link>FractionType.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <Import Project="..\Tools\EnableNet45BuildOnUnix.targets" />
+
+</Project>
