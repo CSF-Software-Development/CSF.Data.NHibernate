@@ -3,9 +3,8 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45;netcoreapp2.0</TargetFrameworks>
     <ReleaseVersion>6.1.3</ReleaseVersion>
-    <PackageId>CSF.PrimesAndFractions.NHibernate4</PackageId>
+    <PackageId>CSF.NHibernate4.PrimesAndFractions</PackageId>
     <Authors>craigfowler</Authors>
-    <Title>CSF.PrimesAndFractions.NHibernate4</Title>
     <Description>A mapping type for the Fraction struct, for NHibernate 4.x</Description>
     <Version>$(ReleaseVersion)</Version>
     <PackageVersion>$(ReleaseVersion)</PackageVersion>
@@ -19,14 +18,14 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DefineConstants>TRACE;DEBUG;NHIBERNATE4</DefineConstants>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.PrimesAndFractions.NHibernate4.xml</DocumentationFile>
+    <DefineConstants>TRACE;NHIBERNATE4;DEBUG</DefineConstants>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.NHibernate4.PrimesAndFractions.xml</DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DefineConstants>TRACE;DEBUG;NHIBERNATE4</DefineConstants>
+    <DefineConstants>NHIBERNATE4</DefineConstants>
     <DebugType></DebugType>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.PrimesAndFractions.NHibernate4.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.NHibernate4.PrimesAndFractions.xml</DocumentationFile>
   </PropertyGroup>
     
   <ItemGroup>

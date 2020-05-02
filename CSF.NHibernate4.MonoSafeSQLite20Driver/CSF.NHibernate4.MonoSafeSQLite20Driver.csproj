@@ -3,9 +3,8 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45;netcoreapp2.0</TargetFrameworks>
     <ReleaseVersion>6.1.3</ReleaseVersion>
-    <PackageId>CSF.NHibernate.MonoSafeSQLite20Driver</PackageId>
+    <PackageId>CSF.NHibernate4.MonoSafeSQLite20Driver</PackageId>
     <Authors>craigfowler</Authors>
-    <Title>CSF.NHibernate.MonoSafeSQLite20Driver</Title>
     <Description>An NHibernate driver implementation for SQLite which is safe to use under the Mono runtime.  When running under Mono, this driver internally uses the Mono-bult-in SQLite drivers and not the incompatible NHibernate one.</Description>
     <Version>$(ReleaseVersion)</Version>
     <PackageVersion>$(ReleaseVersion)</PackageVersion>
@@ -19,12 +18,14 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.NHibernate.MonoSafeSQLite20Driver.xml</DocumentationFile>
+    <DefineConstants>TRACE;NHIBERNATE4;DEBUG</DefineConstants>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.NHibernate4.MonoSafeSQLite20Driver.xml</DocumentationFile>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DefineConstants>NHIBERNATE4</DefineConstants>
     <DebugType></DebugType>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.NHibernate.MonoSafeSQLite20Driver.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\CSF.NHibernate4.MonoSafeSQLite20Driver.xml</DocumentationFile>
   </PropertyGroup>
     
   <ItemGroup>
